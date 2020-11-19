@@ -1,5 +1,5 @@
-#ifndef cg_event_hpp
-#define cg_event_hpp
+#ifndef event_hpp
+#define event_hpp
 
 #include <thread>
 #include <queue>
@@ -53,4 +53,4 @@ namespace cg
     };
 }
 
-#endif //cg_event_hpp
+#endif //event_hpp

@@ -1,24 +1,13 @@
-#ifndef cg_drawables_hpp
-#define cg_drawables_hpp
+#ifndef textures_hpp
+#define textures_hpp
 
-#include "core_graphics.hpp"
-#include "cg_virtual.hpp"
-#include "cg_matrix.hpp"
+#include <string>
+
+#include "Shape.hpp"
 
 
 namespace cg
 {
-
-    class Rectangle: public Shape
-    {
-    public:
-                    Rectangle();
-                    Rectangle(float x1, float y1, float x2, float y2);
-
-        bool        intersects(const Rectangle& rec);
-        void        drawYourself() const;
-    };
-
     class Texture: public Shape
     {
     public:
@@ -36,4 +25,4 @@ namespace cg
     };
 }
 
-#endif //cg_drawables_hpp
+#endif //textures_hpp

@@ -4,8 +4,8 @@
 #include <chrono>
 #include <algorithm>
 
-#include "headers/core_graphics.hpp"
-#include "headers/cg_drawables.hpp"
+#include "headers/Screen.hpp"
+#include "headers/Rectangle.hpp"
 
 // Works with classes which implement getGlobalBounds()
 template <class T>

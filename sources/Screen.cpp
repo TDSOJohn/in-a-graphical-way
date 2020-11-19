@@ -1,32 +1,16 @@
 #include <fstream>
 #include <string>
 
-#include "../headers/core_graphics.hpp"
+#include "../headers/Screen.hpp"
 
 
 namespace cg
 {
-	//	initialization of static constants
-	vi2d Screen::vWorldOffset;
-	float Screen::fWorldScale;
-
-
-//=====================================
-//	Point class implementation
-//=====================================
-	bool    Point::operator==(const Point& p) const
-	{	return ((color == p.color) && (ch == p.ch));	}
-
-	bool    Point::operator!=(const Point& p) const
-	{	return ((color != p.color) || (ch != p.ch));	}
-
-
 //=====================================
 //	Screen class implementation
 //=====================================
 	Screen::Screen()
 	{
-		vWorldOffset = { 0, 0 };
 		has_moved = FALSE;
 
 		initScreen();
@@ -58,14 +42,6 @@ namespace cg
 		mvchgat(y, x, 1, NULL, 0, NULL);
 
 		has_moved = TRUE;
-	}
-
-	void 	Screen::move(vi2d move_vec)
-	{
-		vWorldOffset.x += move_vec.x;
-		vWorldOffset.x = (vWorldOffset.x%size_x);
-		vWorldOffset.y += move_vec.y;
-		vWorldOffset.y = (vWorldOffset.y%size_y);
 	}
 
 	void 	Screen::show()
@@ -107,23 +83,3 @@ namespace cg
 		show();
 	}
 }
-
-
-/*
-//	Negative screen::move() fucks up everything
-void 	Screen::printBackground()
-{
-	if(changes_ready)
-	{
-		for(int i = 0; i < size_x; i++)
-		{
-			for(int j = 0; j < size_y; j++)
-			{
-				printPoint( background_table[i][j],
-							(i + vWorldOffset.x)%size_x,
-							(j + vWorldOffset.y)%size_y);
-			}
-		}
-	}
-}
-*/

@@ -1,5 +1,7 @@
-#ifndef cg_matrix_hpp
-#define cg_matrix_hpp
+#ifndef matrix_hpp
+#define matrix_hpp
+
+#include "V2d.hpp"
 
 
 namespace cg
@@ -65,6 +67,10 @@ namespace cg
     private:
         T table[9];
     };
+
+    typedef transf_generic<uint32_t>    uMatrix;
+    typedef transf_generic<int32_t>     iMatrix;
+    typedef transf_generic<float>       fMatrix;
 }
 
-#endif //cg_matrix_hpp
+#endif //matrix_hpp

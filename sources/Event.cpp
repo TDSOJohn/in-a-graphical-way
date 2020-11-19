@@ -2,7 +2,7 @@
 #include <iostream>
 #include <curses.h>
 
-#include "../headers/cg_event.hpp"
+#include "../headers/Event.hpp"
 
 
 namespace cg

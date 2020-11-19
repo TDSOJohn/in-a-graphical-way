@@ -1,4 +1,5 @@
-#include "../headers/cg_virtual.hpp"
+#include "../headers/Shape.hpp"
+
 
 namespace cg
 {
@@ -17,21 +18,18 @@ namespace cg
 		arrNodes = new Node[nNodes];
 	}
 
-	void Shape::worldToScreen()
-	{}
-
 	void Shape::move(int32_t x, int32_t y)
 	{
 		for(int i = 0; i < nNodes; i++)
 			arrNodes[i].pos += { x, y };
-		hasMoved = TRUE;
+		hasMoved = true;
 	}
 
 	void Shape::move(const vi2d& moveVec)
 	{
 		for(int i = 0; i < nNodes; i++)
 			arrNodes[i].pos += moveVec;
-		hasMoved = TRUE;
+		hasMoved = true;
 	};
 
 	//	Create local bounds from arrNodes data

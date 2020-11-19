@@ -13,25 +13,37 @@ namespace cg
         transf_generic();
         transf_generic( T f00, T f10, T f20,
                         T f01, T f11, T f21,
-                        T f02, T f12, T f22): table{f00,f10,f20,f01,f11,f21,f02,f12,f22}
+                        T f02, T f12, T f22): table{f00,f10,f20,
+                                                    f01,f11,f21,
+                                                    f02,f12,f22}
                         {}
 
-        transf_generic(T val):  table{val,val,val,val,val,val,val,val,val}
-                                {}
+        transf_generic(T val)
+        {
+            for(int i = 0; i < 9; i++)
+                table[i] = val;
+        }
 
-        transf_generic(const transf_generic& tr_in) {}
+        transf_generic(const transf_generic& tr_in)
+        {
+            for(int i = 0; i < 9; i++)
+                table[i] = static_cast<T>(tr_in[i]);
+        }
 
         transf_generic& operator=   (const transf_generic& t) = default;
-        T det()                     const { if(table[1] == table[2] == 0)
-                            return (table[4]*table[8] - table[5]*table[7]);
-                        else
-                            return (table[0]*table[4]*table[8]+
-                                    table[1]*table[5]*table[6]+
-                                    table[2]*table[3]*table[7]-
-                                    table[2]*table[4]*table[6]-
-                                    table[0]*table[5]*table[7]-
-                                    table[1]*table[3]*table[8]);
-            }
+
+        T det()                     const
+        {
+            if(table[1] == table[2] == 0)
+                return (table[4]*table[8] - table[5]*table[7]);
+            else
+                return (table[0]*table[4]*table[8]+
+                        table[1]*table[5]*table[6]+
+                        table[2]*table[3]*table[7]-
+                        table[2]*table[4]*table[6]-
+                        table[0]*table[5]*table[7]-
+                        table[1]*table[3]*table[8]);
+        }
 
         transf_generic operator +   (const transf_generic& rhs) const {
             return transf_generic(  table[0]+rhs[0], table[1]+rhs[1], table[2]+rhs[2],
@@ -62,7 +74,15 @@ namespace cg
                         rhs.x * table[7] + rhs.y * table[8]);
         }
 
-        const transf_generic& returnTransf() { return *this; }
+        const T &operator[](int i) const
+        {
+            if((i >= 0) && (i <= 8))
+                return table[i];
+            else
+                return table[0];
+        }
+
+        const T* getMtrix() const { return table; }
 
     private:
         T table[9];

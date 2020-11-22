@@ -3,7 +3,7 @@
 #include "../headers/Texture.hpp"
 
 
-namespace cg
+namespace iagw
 {
 //=====================================
 //	Texture class

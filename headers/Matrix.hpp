@@ -4,18 +4,24 @@
 #include "V2d.hpp"
 
 
-namespace cg
+namespace iagw
 {
     template <class T>
     class transf_generic
     {
     public:
-        transf_generic();
+        transf_generic():
+                        table  {1, 0, 0,
+                                0, 1, 0,
+                                0, 0, 1}
+                        {}
+
         transf_generic( T f00, T f10, T f20,
                         T f01, T f11, T f21,
-                        T f02, T f12, T f22): table{f00,f10,f20,
-                                                    f01,f11,f21,
-                                                    f02,f12,f22}
+                        T f02, T f12, T f22):
+                        table{f00,f10,f20,
+                              f01,f11,f21,
+                              f02,f12,f22}
                         {}
 
         transf_generic(T val)
@@ -88,8 +94,6 @@ namespace cg
         T table[9];
     };
 
-    typedef transf_generic<uint32_t>    uMatrix;
-    typedef transf_generic<int32_t>     iMatrix;
     typedef transf_generic<float>       fMatrix;
 }
 

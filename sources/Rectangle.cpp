@@ -2,7 +2,7 @@
 #include "../headers/Rectangle.hpp"
 
 
-namespace cg
+namespace iagw
 {
 //=====================================
 //	Rectangle class
@@ -16,7 +16,7 @@ namespace cg
 		arrNodes[1] = {this, {20,0}};
 		arrNodes[2] = {this, {20,10}};
 		arrNodes[3] = {this, {0,10}};
-		hasMoved = true;
+		transfUpdateNeeded = true;
 
 		setLocalBounds();
 	}
@@ -30,7 +30,7 @@ namespace cg
 		arrNodes[1] = {this, {x2,y1}};
 		arrNodes[2] = {this, {x2,y2}};
 		arrNodes[3] = {this, {x1,y2}};
-		hasMoved = true;
+		transfUpdateNeeded = true;
 
 		setLocalBounds();
 	}

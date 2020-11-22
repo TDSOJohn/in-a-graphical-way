@@ -1,7 +1,7 @@
 #include "../headers/Shape.hpp"
 
 
-namespace cg
+namespace iagw
 {
 //=====================================
 //	Generic virtual Shape class
@@ -22,14 +22,14 @@ namespace cg
 	{
 		for(int i = 0; i < nNodes; i++)
 			arrNodes[i].pos += { x, y };
-		hasMoved = true;
+		transfUpdateNeeded = true;
 	}
 
 	void Shape::move(const vi2d& moveVec)
 	{
 		for(int i = 0; i < nNodes; i++)
 			arrNodes[i].pos += moveVec;
-		hasMoved = true;
+		transfUpdateNeeded = true;
 	};
 
 	//	Create local bounds from arrNodes data
@@ -50,5 +50,10 @@ namespace cg
 		localBounds.y = 0;
 		localBounds.width = (max_x - min_x);
 		localBounds.height = (max_y - min_y);
+	}
+
+	void Shape::updateTransform()
+	{
+		
 	}
 }

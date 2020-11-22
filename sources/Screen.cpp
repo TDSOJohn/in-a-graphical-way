@@ -4,14 +4,14 @@
 #include "../headers/Screen.hpp"
 
 
-namespace cg
+namespace iagw
 {
 //=====================================
 //	Screen class implementation
 //=====================================
 	Screen::Screen()
 	{
-		has_moved = FALSE;
+		m_has_moved = FALSE;
 
 		initScreen();
 	}
@@ -22,33 +22,34 @@ namespace cg
 		endwin();
 	}
 
-	void    Screen::printCh(const Point& p, int32_t x, int32_t y)
+/*	void    Screen::printCh(const Pixel& p, int32_t x, int32_t y)
 	{
 		x = x%size_x;
 		y = y%size_y;
 
 		mvaddch(y, x, p.ch);
+		//	header: y, x, int n, attr_t attr, short color, const void *opts
 		mvchgat(y, x, 1, NULL, p.color, NULL);
 
-		has_moved = TRUE;
+		m_has_moved = TRUE;
 	}
-
+*/
 	void 	Screen::printCh(int32_t x, int32_t y, uint8_t cs, char ch)
 	{
 		x = x%size_x;
 		y = y%size_y;
 
 		mvaddch(y, x, ch);
-		mvchgat(y, x, 1, NULL, 0, NULL);
+		mvchgat(y, x, 1, NULL, cs, NULL);
 
-		has_moved = TRUE;
+		m_has_moved = TRUE;
 	}
 
 	void 	Screen::show()
 	{ refresh(); }
 
 	void 	Screen::clear()
-	{ erase(); has_moved = TRUE; }
+	{ erase(); m_has_moved = TRUE; }
 
 	void 	Screen::initScreen()
 	{
@@ -56,12 +57,6 @@ namespace cg
 		if(initscr() == NULL)
 		{
 			fprintf(stderr, "Error initialising ncurses.\n");
-			exit(EXIT_FAILURE);
-		}
-		if(has_colors() == FALSE)
-		{
-			endwin();
-			printf("you terminal does not support color!\n");
 			exit(EXIT_FAILURE);
 		}
 		//	disable buffering of typed chars by the TTY driver
@@ -74,12 +69,30 @@ namespace cg
 		curs_set(0);
 
 		getmaxyx(stdscr, size_y, size_x);
-		start_color();
-
-		for(int i = 0; i < 8; i++)
-			init_pair(i, i, 0);
 
 		printw("this screen is: %d x %d", size_x, size_y);
 		show();
+
+		initColors();
+	}
+
+	void 	Screen::initColors()
+	{
+		if((m_has_colors = has_colors()) == FALSE)
+			printw("you terminal does not support color!\n");
+		else
+		{
+			start_color();
+			//	color_pair 0 is initialized before color
+			//	cannot be modified by the program
+			for(int i = 0; i < 8; i++)
+			{
+				for(int j = 0; j < 8; j++)
+				{
+					if((i != 0) || (j != 0))
+					init_pair(((i * 8) + j), j, i);
+				}
+			}
+		}
 	}
 }

@@ -5,7 +5,7 @@
 #include <string>
 
 
-namespace cg
+namespace iagw
 {
 //===============================================================================
 //  Generic 2d vector class

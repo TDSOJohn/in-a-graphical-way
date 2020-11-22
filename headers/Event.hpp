@@ -5,7 +5,7 @@
 #include <queue>
 
 
-namespace cg
+namespace iagw
 {
     enum Key
 	{

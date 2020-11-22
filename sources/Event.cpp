@@ -5,7 +5,7 @@
 #include "../headers/Event.hpp"
 
 
-namespace cg
+namespace iagw
 {
     EventHandler::EventHandler(): mainThread(&EventHandler::eventLoop, this)
     {

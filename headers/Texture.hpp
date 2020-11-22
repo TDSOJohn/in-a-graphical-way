@@ -6,7 +6,7 @@
 #include "Shape.hpp"
 
 
-namespace cg
+namespace iagw
 {
     class Texture: public Shape
     {

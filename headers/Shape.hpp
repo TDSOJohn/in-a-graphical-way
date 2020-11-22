@@ -11,7 +11,7 @@
 #include "Matrix.hpp"
 #include "Rect.hpp"
 
-namespace cg
+namespace iagw
 {
     //  Forward declaration
     struct Shape;
@@ -54,12 +54,15 @@ namespace cg
         Recti           localBounds;
         fMatrix         transformation;
 
-        bool            hasMoved;
+        bool            transfUpdateNeeded;
 
     protected:
         //  Generates localBound Rect. Not called in virtual Shape class,
         //  needs to be called by derived class at construction, after arrNodes is populated
         void            setLocalBounds();
+
+        //  Update transformation matrix
+        void            updateTransform();
     };
 
 }

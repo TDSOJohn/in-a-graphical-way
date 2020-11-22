@@ -4,7 +4,7 @@
 #include <cmath>
 
 
-namespace cg
+namespace iagw
 {
 //===============================================================================
 //  Rectangle Structure, useful for bounding rectangles

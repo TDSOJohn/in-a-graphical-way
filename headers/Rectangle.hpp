@@ -4,7 +4,7 @@
 #include "Shape.hpp"
 
 
-namespace cg
+namespace iagw
 {
     class Rectangle: public Shape
     {

@@ -6,11 +6,11 @@ LDLIBS		:= -lncurses -pthread
 
 objects 	= screen.o shape.o rectangle.o texture.o
 
-iagw_core		= headers/V2d.hpp headers/Rect.hpp headers/Point.hpp
+iagw_core	= headers/V2d.hpp headers/Rect.hpp headers/Pixel.hpp headers/Matrix.hpp
 
 
 libcg: $(objects)
-	ar rcs libcg.a $(objects)
+	ar rcs libiagw.a $(objects)
 
 screen.o: $(iagw_core) headers/Screen.hpp sources/Screen.cpp
 	g++ $(CPPFLAGS) -c sources/Screen.cpp

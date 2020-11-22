@@ -6,7 +6,7 @@ Includes Rectangle and Texture classes (Texture loads any .txt ASCII art), deriv
 
 Create static library with makefile, compile your project using
 
-	g++ --std=c++11 your_file.cpp -L. -lcg -lncurses
+	g++ --std=c++11 your_file.cpp -L. -liagw -lncurses
 
 
 Known errors:

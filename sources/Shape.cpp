@@ -1,3 +1,6 @@
+
+#include <curses.h>
+
 #include "../headers/Shape.hpp"
 
 
@@ -54,6 +57,6 @@ namespace iagw
 
 	void Shape::updateTransform()
 	{
-		
+
 	}
 }

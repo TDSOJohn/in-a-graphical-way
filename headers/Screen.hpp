@@ -1,8 +1,6 @@
 #ifndef screen_hpp
 #define screen_hpp
 
-#include <ncurses.h>
-
 #include "V2d.hpp"
 #include "Pixel.hpp"
 
@@ -28,13 +26,15 @@ namespace iagw
 //        void        printCh(const Pixel& p, int32_t x, int32_t y);
         void        printCh(int32_t x, int32_t y, uint8_t cs = 0, char ch = '.');
 
-        vi2d        returnSize() { return (vi2d(size_x, size_y)); }
-
         void        show();
         void        clear();
 
+        vi2d        returnSize() { return (vi2d(size_x, size_y)); }
+
     private:
+        //  initialize screen, set up memory, cbreak, noecho, ...
         void        initScreen();
+        //  start color mode, initialize color pairs
         void        initColors();
 
     private:

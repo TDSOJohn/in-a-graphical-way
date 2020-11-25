@@ -4,17 +4,15 @@
 #include <cmath>
 #include <algorithm>
 
-#include <curses.h>
-
-
 #include "V2d.hpp"
-#include "Matrix.hpp"
+#include "Transform.hpp"
 #include "Rect.hpp"
+
 
 namespace iagw
 {
     //  Forward declaration
-    struct Shape;
+    class Shape;
 
     // light-weight Node Structure
     struct Node
@@ -52,7 +50,7 @@ namespace iagw
         uint8_t         color = 7;
 
         Recti           localBounds;
-        fMatrix         transformation;
+        Transform       transformation;
 
         bool            transfUpdateNeeded;
 

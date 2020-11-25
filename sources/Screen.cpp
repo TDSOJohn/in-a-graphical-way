@@ -1,6 +1,8 @@
 #include <fstream>
 #include <string>
 
+#include <curses.h>
+
 #include "../headers/Screen.hpp"
 
 
@@ -11,8 +13,6 @@ namespace iagw
 //=====================================
 	Screen::Screen()
 	{
-		m_has_moved = FALSE;
-
 		initScreen();
 	}
 
@@ -53,7 +53,7 @@ namespace iagw
 
 	void 	Screen::initScreen()
 	{
-		// initialize the screen, set up memory, start color mode
+		// initialize the screen, set up memory
 		if(initscr() == NULL)
 		{
 			fprintf(stderr, "Error initialising ncurses.\n");

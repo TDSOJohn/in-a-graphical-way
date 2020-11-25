@@ -1,5 +1,7 @@
 #include <fstream>
 
+#include <curses.h>
+
 #include "../headers/Texture.hpp"
 
 

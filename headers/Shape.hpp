@@ -30,33 +30,39 @@ namespace iagw
     public:
                         Shape();
                         Shape(uint8_t nodes);
+                        Shape(uint8_t nodes, uint8_t b_col_in, uint8_t f_col_in);
 
         virtual void    drawYourself() const = 0;
 
-        vi2d            returnPosition() { return arrNodes[0].pos; }
+        vi2d            returnPosition() { return arr_nodes[0].pos; }
 
-        Recti           getLocalBounds() { return localBounds; }
-        Recti           getGlobalBounds() { return (localBounds + arrNodes[0].pos); }
+        Recti           getLocalBounds() { return local_bounds; }
+        //  !!!arr_nodes[0] might not be at (min(x), min(y))
+        Recti           getGlobalBounds() { return (local_bounds + arr_nodes[0].pos); }
 
+        const Transform& getTransform();
+
+        //  !!!add setPosition function
         void            setPosition(const vi2d& new_pos) {}
+        void            setColor(uint8_t b_col_in, uint8_t f_col_in);
 
         void            move(int32_t x, int32_t y);
-        void            move(const vi2d& moveVec);
+        void            move(const vi2d& move_vec);
 
     protected:
-        Node            *arrNodes;
-        vf2d            center;
-        uint32_t        nNodes = 0;
-        uint8_t         color = 7;
+        Node            *arr_nodes;
+        vi2d            origin;
+        uint32_t        n_nodes;
+        uint8_t         color;
 
-        Recti           localBounds;
-        Transform       transformation;
+        Recti           local_bounds;
+        Transform       m_transform;
 
-        bool            transfUpdateNeeded;
+        bool            transf_need_update;
 
     protected:
         //  Generates localBound Rect. Not called in virtual Shape class,
-        //  needs to be called by derived class at construction, after arrNodes is populated
+        //  needs to be called by derived class at construction, after arr_nodes is populated
         void            setLocalBounds();
 
         //  Update transformation matrix

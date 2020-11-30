@@ -4,13 +4,16 @@ CPPFLAGS	:= --std=c++2a
 LDLIBS		:= -lncurses -pthread
 
 
-objects 	= screen.o shape.o rectangle.o texture.o transform.o
+objects 	= rendertarget.o screen.o shape.o rectangle.o texture.o transform.o vertexarray.o
 
-iagw_core	= headers/V2d.hpp headers/Rect.hpp headers/Pixel.hpp headers/Transform.hpp sources/Transform.cpp
+iagw_core	= 	headers/V2d.hpp headers/Rect.hpp headers/Pixel.hpp headers/Transform.hpp sources/Transform.cpp headers/RenderTarget.hpp sources/RenderTarget.cpp
 
 
 libcg: $(objects)
 	ar rcs libiagw.a $(objects)
+
+rendertarget.o: $(iagw_core)
+	g++ $(CPPFLAGS) -c sources/RenderTarget.cpp
 
 screen.o: $(iagw_core) headers/Screen.hpp sources/Screen.cpp
 	g++ $(CPPFLAGS) -c sources/Screen.cpp
@@ -26,6 +29,9 @@ texture.o: $(iagw_core) headers/Shape.hpp sources/Shape.cpp headers/Texture.hpp 
 
 rectangle.o: $(iagw_core) headers/Shape.hpp sources/Shape.cpp headers/Rectangle.hpp sources/Rectangle.cpp
 	g++ $(CPPFLAGS) -c sources/Rectangle.cpp
+
+vertexarray.o: $(aigw_core) headers/Shape.hpp sources/Shape.cpp headers/VertexArray.hpp sources/VertexArray.cpp
+	g++ $(CPPFLAGS) -c sources/VertexArray.cpp
 
 event.o: $(iagw_core) headers/Event.hpp sources/Event.cpp
 	g++ $(CPPFLAGS) -c sources/Event.cpp

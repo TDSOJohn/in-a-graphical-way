@@ -12,27 +12,28 @@ namespace iagw
     struct Pixel
     {
         //  Foreground and Background colors pair (0, ..., max_pairs)
+        //  char to print in the Pixel
         uint8_t color;
         char    ch;
-        bool    alpha;
 
+        //  Default constructor has: color_pair 0 (default terminal color_pair), space ch and no alpha
         Pixel():
-            color(0), ch(' '), alpha(false)
+            color(0), ch(' ')
         {}
 
         Pixel(const Pixel& p_in):
-            color(p_in.color), ch(p_in.ch), alpha(p_in.alpha)
+            color(p_in.color), ch(p_in.ch)
         {}
 
-        Pixel(uint8_t col_in, char ch_in = ' ', bool a_in = false):
-            ch(ch_in%256), alpha(a_in)
+        Pixel(uint8_t b_col_in, uint8_t f_col_in, char ch_in = ' '):
+            ch(ch_in%256)
 		{
-            if((col_in >= 0) && (col_in <= 62))
-                color = col_in;
+            uint8_t temp_color = (b_col_in * f_col_in) + f_col_in;
+            if((temp_color >= 0) && (temp_color <= 62))
+                color = temp_color;
             else
                 color = 0;
         }
-
 
         Pixel&  operator = (const Pixel& v) = default;
 

@@ -15,6 +15,7 @@ namespace iagw
         T x = 0;
         T y = 0;
         T width, height;
+        
         Rect(): x(0), y(0), width(0), height(0) {}
         Rect(T x_in, T y_in, T w_in, T h_in):   x(x_in),
                                                 y(y_in),

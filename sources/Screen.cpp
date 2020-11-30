@@ -11,14 +11,22 @@ namespace iagw
 //=====================================
 //	Screen class implementation
 //=====================================
-	Screen::Screen()
+	Screen::Screen():
+		RenderTarget(10, 10)
 	{
 		initScreen();
 	}
 
+	Screen::Screen(int32_t x, int32_t y):
+		RenderTarget(x, y)
+	{
+
+	}
+
 	Screen::~Screen()
 	{
-		// dealocate memory and end ncurses
+		// 	dealocate memory and end ncurses
+		//	put terminal back in normal mode
 		endwin();
 	}
 
@@ -34,13 +42,26 @@ namespace iagw
 		m_has_moved = TRUE;
 	}
 */
-	void 	Screen::printCh(int32_t x, int32_t y, uint8_t cs, char ch)
+	void 	Screen::printCh(int32_t x, int32_t y, uint8_t b_col, uint8_t f_col, char ch)
 	{
 		x = x%size_x;
 		y = y%size_y;
 
-		mvaddch(y, x, ch);
-		mvchgat(y, x, 1, NULL, cs, NULL);
+		uint8_t temp_col = (b_col * 8) + f_col;
+
+		if(!(rand()%2))
+		{
+			attron(COLOR_PAIR(temp_col));
+			mvaddch(y, x, ch);
+			attroff(COLOR_PAIR(temp_col));
+		} else
+		{
+			attron(COLOR_PAIR(temp_col - 8));
+			mvaddch(y, x, ch);
+			attroff(COLOR_PAIR(temp_col - 8));
+		}
+
+//		mvchgat(y, x, 1, NULL, temp_col, NULL);
 
 		m_has_moved = TRUE;
 	}
@@ -68,6 +89,7 @@ namespace iagw
 		//	Set the cursor to invisible
 		curs_set(0);
 
+//		m_window = create_newwin(size_x, size_y, 0, 0);
 		getmaxyx(stdscr, size_y, size_x);
 
 		printw("this screen is: %d x %d", size_x, size_y);
@@ -90,7 +112,7 @@ namespace iagw
 				for(int j = 0; j < 8; j++)
 				{
 					if((i != 0) || (j != 0))
-					init_pair(((i * 8) + j), j, i);
+						init_pair(((i * 8) + j), j, i);
 				}
 			}
 		}

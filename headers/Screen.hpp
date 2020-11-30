@@ -3,6 +3,7 @@
 
 #include "V2d.hpp"
 #include "Pixel.hpp"
+#include "RenderTarget.hpp"
 
 
 //  Rules concerning coordinates:
@@ -17,14 +18,15 @@ namespace iagw
 //  Never call more than 1, it automatically starts a ncurses window
 //  Never use std::cout and std::cin when using core_graphics
 //===============================================================================
-    class Screen
+    class Screen : public RenderTarget
     {
     public:
                     Screen();
+                    Screen(int32_t x, int32_t y);
                     ~Screen();
 
-//        void        printCh(const Pixel& p, int32_t x, int32_t y);
-        void        printCh(int32_t x, int32_t y, uint8_t cs = 0, char ch = '.');
+        void        printCh(const Pixel& p, int32_t x, int32_t y);
+        void        printCh(int32_t x, int32_t y, uint8_t b_col, uint8_t f_col, char ch = '.');
 
         void        show();
         void        clear();
@@ -38,11 +40,8 @@ namespace iagw
         void        initColors();
 
     private:
-        uint32_t    size_x,
-                    size_y;
-
         bool        m_has_moved;
-        bool        m_has_colors;
+//        WINDOW*     m_window;
     };
 }
 

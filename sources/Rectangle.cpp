@@ -8,43 +8,39 @@ namespace iagw
 //=====================================
 //	Rectangle class
 //=====================================
-	Rectangle::Rectangle()
+	Rectangle::Rectangle(): Shape()
 	{
-		nNodes = 4;
-		arrNodes = new Node[4];
 		//	find better way to initialize
-		arrNodes[0] = {this, {0,0}};
-		arrNodes[1] = {this, {20,0}};
-		arrNodes[2] = {this, {20,10}};
-		arrNodes[3] = {this, {0,10}};
-		transfUpdateNeeded = true;
+		arr_nodes[0] = {this, {0,0}};
+		arr_nodes[1] = {this, {20,0}};
+		arr_nodes[2] = {this, {20,10}};
+		arr_nodes[3] = {this, {0,10}};
+		transf_need_update = true;
 
 		setLocalBounds();
 	}
 
-	Rectangle::Rectangle(float x1, float y1, float x2, float y2)
+	Rectangle::Rectangle(float x1, float y1, float x2, float y2): Shape()
 	{
-		nNodes = 4;
-		arrNodes = new Node[4];
 		//	find better way to initialize
-		arrNodes[0] = {this, {x1,y1}};
-		arrNodes[1] = {this, {x2,y1}};
-		arrNodes[2] = {this, {x2,y2}};
-		arrNodes[3] = {this, {x1,y2}};
-		transfUpdateNeeded = true;
+		arr_nodes[0] = {this, {x1,y1}};
+		arr_nodes[1] = {this, {x2,y1}};
+		arr_nodes[2] = {this, {x2,y2}};
+		arr_nodes[3] = {this, {x1,y2}};
+		transf_need_update = true;
 
 		setLocalBounds();
 	}
 
 	void Rectangle::drawYourself() const
 	{
-		mvhline(arrNodes[0].pos.y, arrNodes[0].pos.x, 0, arrNodes[2].pos.x - arrNodes[0].pos.x);
-		mvhline(arrNodes[2].pos.y, arrNodes[0].pos.x, 0, arrNodes[2].pos.x - arrNodes[0].pos.x);
-		mvvline(arrNodes[0].pos.y, arrNodes[0].pos.x, 0, arrNodes[2].pos.y - arrNodes[0].pos.y);
-		mvvline(arrNodes[0].pos.y, arrNodes[2].pos.x, 0, arrNodes[2].pos.y - arrNodes[0].pos.y);
-		mvaddch(arrNodes[0].pos.y, arrNodes[0].pos.x, ACS_ULCORNER);
-		mvaddch(arrNodes[2].pos.y, arrNodes[0].pos.x, ACS_LLCORNER);
-		mvaddch(arrNodes[0].pos.y, arrNodes[2].pos.x, ACS_URCORNER);
-		mvaddch(arrNodes[2].pos.y, arrNodes[2].pos.x, ACS_LRCORNER);
+		mvhline(arr_nodes[0].pos.y, arr_nodes[0].pos.x, 0, arr_nodes[2].pos.x - arr_nodes[0].pos.x);
+		mvhline(arr_nodes[2].pos.y, arr_nodes[0].pos.x, 0, arr_nodes[2].pos.x - arr_nodes[0].pos.x);
+		mvvline(arr_nodes[0].pos.y, arr_nodes[0].pos.x, 0, arr_nodes[2].pos.y - arr_nodes[0].pos.y);
+		mvvline(arr_nodes[0].pos.y, arr_nodes[2].pos.x, 0, arr_nodes[2].pos.y - arr_nodes[0].pos.y);
+		mvaddch(arr_nodes[0].pos.y, arr_nodes[0].pos.x, ACS_ULCORNER);
+		mvaddch(arr_nodes[2].pos.y, arr_nodes[0].pos.x, ACS_LLCORNER);
+		mvaddch(arr_nodes[0].pos.y, arr_nodes[2].pos.x, ACS_URCORNER);
+		mvaddch(arr_nodes[2].pos.y, arr_nodes[2].pos.x, ACS_LRCORNER);
 	}
 }

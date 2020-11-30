@@ -10,16 +10,16 @@ namespace iagw
 //=====================================
 //	Texture class
 //=====================================
-	Texture::Texture(): Shape::Shape()
+	Texture::Texture(): Shape()
 	{}
 
-	Texture::Texture(int32_t x, int32_t y, const std::string& file_name): Shape::Shape()
+	Texture::Texture(int32_t x, int32_t y, const std::string& file_name): Shape()
 	{
 		loadFromFile(file_name);
 		move(x, y);
 	}
 
-	Texture::Texture(const std::string& file_name): Shape::Shape()
+	Texture::Texture(const std::string& file_name): Shape()
 	{ loadFromFile(file_name); }
 
 	void  	Texture::loadFromFile(const std::string& file_name)
@@ -55,21 +55,21 @@ namespace iagw
 	                text_table[i][j] = ' ';
 	        }
 	    }
-		arrNodes[0] = {this, vi2d{0,0}};
-		arrNodes[1] = {this, vi2d{row_len,0}};
-		arrNodes[2] = {this, vi2d{row_len,col_len}};
-		arrNodes[3] = {this, vi2d{0,col_len}};
+		arr_nodes[0] = {this, vi2d{0,0}};
+		arr_nodes[1] = {this, vi2d{row_len,0}};
+		arr_nodes[2] = {this, vi2d{row_len,col_len}};
+		arr_nodes[3] = {this, vi2d{0,col_len}};
 		setLocalBounds();
 	}
 
 	void 	Texture::drawYourself() const
 	{
-		for(int i = 0; i < (arrNodes[2].pos.x - arrNodes[0].pos.x); i++)
+		for(int i = 0; i < (arr_nodes[2].pos.x - arr_nodes[0].pos.x); i++)
 		{
-			for(int j = 0; j < (arrNodes[2].pos.y - arrNodes[0].pos.y); j++)
+			for(int j = 0; j < (arr_nodes[2].pos.y - arr_nodes[0].pos.y); j++)
 			{
-				mvaddch(j + arrNodes[0].pos.y,
-						i + arrNodes[0].pos.x,
+				mvaddch(j + arr_nodes[0].pos.y,
+						i + arr_nodes[0].pos.x,
 						text_table[j][i]);
 			}
 		}

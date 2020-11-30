@@ -7,6 +7,7 @@ namespace iagw
     class RenderTarget
     {
         //  Added to use the syntax RenderTarget::draw(const Shape& s_in)
+        //  (see last comment for more)
         friend class Shape;
 
     public:
@@ -28,10 +29,17 @@ namespace iagw
 }
 
 /*
+RenderTarget.draw(Something) seems nicer than Something.draw(RenderTarget)
 Syntax:
 RenderTarget::draw(const Shape& s_in)
 {
     s_in.draw(*this);
 }
 Shape.draw is protected => Shape must be friend of RenderTarget
+*/
+
+/* Use
+    attron(COLOR_PAIR(i));
+    print_something();
+    atroff(COLOR_PAIR(i));
 */

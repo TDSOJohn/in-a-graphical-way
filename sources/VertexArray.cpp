@@ -50,8 +50,8 @@ namespace iagw
 
             for(int j = 0; j < hyp; j++)
             {
-        			mvaddch(static_cast<int>(std::sin(angle)*j + arr_nodes[i].pos.y),
-                            static_cast<int>(std::cos(angle)*j + arr_nodes[i].pos.x),
+        			mvaddch(std::round(std::sin(angle)*j + arr_nodes[i].pos.y),
+                            std::round(std::cos(angle)*j + arr_nodes[i].pos.x),
                             ' ');
             }
             attroff(COLOR_PAIR(color));

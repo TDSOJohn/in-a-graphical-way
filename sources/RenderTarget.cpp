@@ -1,4 +1,3 @@
-
 #include "../headers/RenderTarget.hpp"
 
 namespace iagw

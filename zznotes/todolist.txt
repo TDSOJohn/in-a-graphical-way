@@ -1,0 +1,22 @@
+
+//////////////////////////////////////////////////////////////
+//                ALWAYS UPDATE THE SCHEME                  //
+//////////////////////////////////////////////////////////////
+
+
+
+1)  Transformation is incomplete and should be throughtly tested
+
+2)  Transformation should be implemented in Shape class
+
+3)  Makefile should be improved. Better search how to correctly implement it
+
+4)  RenderTarget is incomplete and unused. Think about how to draw it to another renderTarget& (es.: Screen)
+
+5)  Implement view? if yes, create transformable class and make view inherit it (canvas also?)
+
+6)  Create Canvas class header and implementation
+
+7)  Event now crashes everything, better patch it!
+
+8) has_colors in RenderTarget is useless, needs to be checked when printing colored stuff

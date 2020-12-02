@@ -20,6 +20,7 @@ namespace iagw
 	{
 		n_nodes = nodes;
 		arr_nodes = new Node[n_nodes];
+		color = 56;
 	}
 
 	Shape::Shape(uint8_t nodes, uint8_t b_col_in, uint8_t f_col_in)

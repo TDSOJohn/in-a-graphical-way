@@ -36,9 +36,9 @@ namespace iagw
 
         vi2d            returnPosition() { return arr_nodes[0].pos; }
 
-        Recti           getLocalBounds() { return local_bounds; }
+        Rectf           getLocalBounds() { return local_bounds; }
         //  !!!arr_nodes[0] might not be at (min(x), min(y))
-        Recti           getGlobalBounds() { return (local_bounds + arr_nodes[0].pos); }
+        Rectf           getGlobalBounds() { return (local_bounds + arr_nodes[0].pos); }
 
         const Transform& getTransform();
 
@@ -55,7 +55,7 @@ namespace iagw
         uint32_t        n_nodes;
         uint8_t         color;
 
-        Recti           local_bounds;
+        Rectf           local_bounds;
         Transform       m_transform;
 
         bool            transf_need_update;

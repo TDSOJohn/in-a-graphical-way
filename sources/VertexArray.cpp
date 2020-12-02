@@ -12,12 +12,9 @@ namespace iagw
     VertexArray::VertexArray():
         Shape(2)
     {
-        arr_nodes[0].pos = { 0, 0 };
-        arr_nodes[1].pos = { rand()%20 + 20, rand()%20 + 20 };
-        printw("nodes: %d, %d   %d, %d", arr_nodes[0].pos.x,
-                                         arr_nodes[0].pos.y,
-                                         arr_nodes[1].pos.x,
-                                         arr_nodes[1].pos.y);
+        arr_nodes[0].pos = { 30, 30 };
+        arr_nodes[1].pos = { rand()%20, rand()%20 };
+
         setLocalBounds();
     }
 
@@ -38,25 +35,45 @@ namespace iagw
         }
     }
 
+    //  Lines' drawing implemented using Digital Differential Analyzer algorithm
     void VertexArray::drawYourself() const
     {
         for(int i = 0; i < n_nodes - 1; i++)
         {
-            double      angle = std::atan(float(local_bounds.height) / float(local_bounds.width));
-            uint32_t    hyp =  std::sqrt(local_bounds.height*local_bounds.height +
-                                    local_bounds.width*local_bounds.width);
+            float   dx  = arr_nodes[i+1].pos.x - arr_nodes[i].pos.x;
+            float   dy  = arr_nodes[i+1].pos.y - arr_nodes[i].pos.y;
+
+            float   m   = dx/dy;
+            float   step, x, y;
+            //  manually code if the line is vertical (not a function)
+/*            if(dx == 0)
+            {
+                for(int i = 0; i < )
+            }
+*/
+            if(std::abs(dx) >= std::abs(dy))
+                step = std::abs(dx);
+            else
+                step = std::abs(dy);
+
+            dx = dx / step;
+            dy = dy / step;
+
+            x = arr_nodes[i].pos.x;
+            y = arr_nodes[i].pos.y;
 
             attron(COLOR_PAIR(color));
 
-            for(int j = 0; j < hyp; j++)
+            for(int j = 0; j < step; j++)
             {
-        			mvaddch(std::round(std::sin(angle)*j + arr_nodes[i].pos.y),
-                            std::round(std::cos(angle)*j + arr_nodes[i].pos.x),
-                            ' ');
+                mvaddch(std::round(y),
+                        std::round(x),
+                        ' ');
+                x = x + dx;
+                y = y + dy;
             }
+
             attroff(COLOR_PAIR(color));
-            printw("line is inside: %d x %d", local_bounds.width, local_bounds.height);
-            printw(" angle is: %f and loop is: %d", angle, hyp);
         }
 
     }

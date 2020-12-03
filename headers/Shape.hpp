@@ -34,7 +34,11 @@ namespace iagw
 
         virtual void    drawYourself() const = 0;
 
-        vi2d            returnPosition() { return arr_nodes[0].pos; }
+        void            setColor(uint8_t b_col_in, uint8_t f_col_in);
+
+        //  !!!add setPosition function
+        vi2d            getPosition() { return arr_nodes[0].pos; }
+        void            setPosition(const vi2d& new_pos) {}
 
         Rectf           getLocalBounds() { return local_bounds; }
         //  !!!arr_nodes[0] might not be at (min(x), min(y))
@@ -42,19 +46,21 @@ namespace iagw
 
         const Transform& getTransform();
 
-        //  !!!add setPosition function
-        void            setPosition(const vi2d& new_pos) {}
-        void            setColor(uint8_t b_col_in, uint8_t f_col_in);
 
         void            move(int32_t x, int32_t y);
         void            move(const vi2d& move_vec);
 
+        void            rotate(float r);
+        void            setRotation(float r);
+        float           getRotation() const;
+
     protected:
         Node            *arr_nodes;
-        vi2d            origin;
-        uint32_t        n_nodes;
-        uint8_t         color;
+        uint32_t        m_nodes;
+        uint8_t         m_color;
 
+        float           m_rotation;
+        vi2d            m_origin;
         Rectf           local_bounds;
         Transform       m_transform;
 

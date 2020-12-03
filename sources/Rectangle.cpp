@@ -8,7 +8,7 @@ namespace iagw
 //=====================================
 //	Rectangle class
 //=====================================
-	Rectangle::Rectangle(): Shape()
+	Rectangle::Rectangle(): Shape(4)
 	{
 		//	find better way to initialize
 		arr_nodes[0] = {this, {0,0}};
@@ -20,7 +20,7 @@ namespace iagw
 		setLocalBounds();
 	}
 
-	Rectangle::Rectangle(float x1, float y1, float x2, float y2): Shape()
+	Rectangle::Rectangle(float x1, float y1, float x2, float y2): Shape(4)
 	{
 		//	find better way to initialize
 		arr_nodes[0] = {this, {x1,y1}};
@@ -34,6 +34,8 @@ namespace iagw
 
 	void Rectangle::drawYourself() const
 	{
+		attron(COLOR_PAIR(m_color));
+
 		mvhline(arr_nodes[0].pos.y, arr_nodes[0].pos.x, 0, arr_nodes[2].pos.x - arr_nodes[0].pos.x);
 		mvhline(arr_nodes[2].pos.y, arr_nodes[0].pos.x, 0, arr_nodes[2].pos.x - arr_nodes[0].pos.x);
 		mvvline(arr_nodes[0].pos.y, arr_nodes[0].pos.x, 0, arr_nodes[2].pos.y - arr_nodes[0].pos.y);
@@ -42,5 +44,7 @@ namespace iagw
 		mvaddch(arr_nodes[2].pos.y, arr_nodes[0].pos.x, ACS_LLCORNER);
 		mvaddch(arr_nodes[0].pos.y, arr_nodes[2].pos.x, ACS_URCORNER);
 		mvaddch(arr_nodes[2].pos.y, arr_nodes[2].pos.x, ACS_LRCORNER);
+
+		attroff(COLOR_PAIR(m_color));
 	}
 }

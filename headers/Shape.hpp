@@ -28,7 +28,9 @@ namespace iagw
     class Shape
     {
     public:
+                        //  initializes a rectangle at (0,0)
                         Shape();
+                        //  !!!all nodes are at (0,0)
                         Shape(uint8_t nodes);
                         Shape(uint8_t nodes, uint8_t b_col_in, uint8_t f_col_in);
 

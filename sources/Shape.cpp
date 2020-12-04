@@ -96,8 +96,8 @@ namespace iagw
 
 	void Shape::updateTransform()
 	{
-		m_transform = { 1, 			0, 						0,
-						m_origin.x, std::cos(m_rotation), 	std::sin(m_rotation),
-						m_origin.y, -(std::sin(m_rotation)),std::cos(m_rotation) };
+		m_transform = { 	1,				0,						0,
+		static_cast<float>	(m_origin.x), 	std::cos(m_rotation), 	std::sin(m_rotation),
+		static_cast<float>	(m_origin.y), 	-(std::sin(m_rotation)),std::cos(m_rotation) };
 	}
 }

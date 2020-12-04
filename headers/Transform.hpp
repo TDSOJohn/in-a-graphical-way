@@ -12,6 +12,7 @@ namespace iagw
     class Transform
     {
     public:
+        //  initializes identity matrix
         Transform();
 
         Transform(  float f00, float f10, float f20,

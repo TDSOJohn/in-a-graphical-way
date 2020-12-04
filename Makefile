@@ -6,13 +6,15 @@ LDLIBS		:= -lncurses -pthread
 
 objects 	= RenderTarget.o Screen.o Shape.o Rectangle.o Texture.o Transform.o VertexArray.o
 
-iagw_core	= 	headers/V2d.hpp headers/Rect.hpp headers/Pixel.hpp headers/Transform.hpp sources/Transform.cpp headers/RenderTarget.hpp sources/RenderTarget.cpp
+iagw_core	= 	headers/V2d.hpp headers/Rect.hpp headers/Pixel.hpp \
+				headers/Transform.hpp sources/Transform.cpp \
+				headers/RenderTarget.hpp sources/RenderTarget.cpp
 
 
 libcg: $(objects)
 	ar rcs libiagw.a $(objects)
 
-RenderTarget.o: $(iagw_core)
+RenderTarget.o: $(iagw_core) sources/RenderTarget.cpp
 	g++ $(CPPFLAGS) -c sources/RenderTarget.cpp
 
 Screen.o: $(iagw_core) headers/Screen.hpp sources/Screen.cpp

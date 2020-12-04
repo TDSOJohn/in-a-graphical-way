@@ -13,7 +13,7 @@ namespace iagw
         VertexArray(int32_t vertex_count);
         VertexArray(const vf2d* coordinates, int size);
 
-        void drawYourself() const;
+        void drawYourself();
     };
 }
 

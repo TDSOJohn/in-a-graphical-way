@@ -36,7 +36,7 @@ namespace iagw
                         Shape(uint8_t nodes);
                         Shape(uint8_t nodes, uint8_t b_col_in, uint8_t f_col_in);
 
-        virtual void    drawYourself() const = 0;
+        virtual void    drawYourself() = 0;
 
         void            setColor(uint8_t b_col_in, uint8_t f_col_in);
 
@@ -80,5 +80,5 @@ namespace iagw
 
 }
 
-
+//T x (1, x, y) per ogni node
 #endif //shape_hpp

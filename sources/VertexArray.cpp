@@ -33,11 +33,11 @@ namespace iagw
     }
 
     //  Lines' drawing implemented using Digital Differential Analyzer algorithm
-    void VertexArray::drawYourself() const
+    void VertexArray::drawYourself()
     {
         if(transf_need_update)
         {
-            
+            updateTransform();
         }
 
         for(int i = 0; i < m_nodes - 1; i++)

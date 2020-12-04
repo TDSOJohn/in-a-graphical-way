@@ -1,4 +1,4 @@
-
+#include <iostream>
 #include <curses.h>
 
 #include "../headers/Shape.hpp"
@@ -9,6 +9,21 @@ namespace iagw
 //=====================================
 //	Generic virtual Shape class
 //=====================================
+	void Shape::printData()
+	{
+		std::cout << "\n\n";
+		std::cout << "origin is at: " << m_origin.str() << std::endl;
+		std::cout << "rotation is: " << m_rotation << std::endl;
+		std::cout << "nodes are at: ";
+		for(int i = 0; i < m_nodes; i++)
+		{
+			std::cout << arr_nodes[i].pos.str() << "\t";
+		}
+		std::cout << std::endl;
+	}
+
+
+
 	Shape::Shape():
 		m_nodes(4),
 		m_origin(0, 0),
@@ -97,7 +112,7 @@ namespace iagw
 	void Shape::updateTransform()
 	{
 		m_transform = { 	1,				0,						0,
-		static_cast<float>	(m_origin.x), 	std::cos(m_rotation), 	std::sin(m_rotation),
-		static_cast<float>	(m_origin.y), 	-(std::sin(m_rotation)),std::cos(m_rotation) };
+		static_cast<float>	(m_origin.x), 	std::cos(m_rotation), 	-(std::sin(m_rotation)),
+		static_cast<float>	(m_origin.y), 	std::sin(m_rotation),   std::cos(m_rotation) };
 	}
 }

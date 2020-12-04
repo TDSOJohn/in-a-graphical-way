@@ -28,6 +28,8 @@ namespace iagw
     class Shape
     {
     public:
+        void            printData();
+
                         //  initializes a rectangle at (0,0)
                         Shape();
                         //  !!!all nodes are at (0,0)
@@ -47,7 +49,6 @@ namespace iagw
         Rectf           getGlobalBounds() { return (local_bounds + arr_nodes[0].pos); }
 
         const Transform& getTransform();
-
 
         void            move(int32_t x, int32_t y);
         void            move(const vi2d& move_vec);

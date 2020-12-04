@@ -4,7 +4,7 @@ CPPFLAGS	:= --std=c++2a
 LDLIBS		:= -lncurses -pthread
 
 
-objects 	= RenderTarget.o Screen.o Shape.o Rectangle.o Texture.o Transform.o VertexArray.o
+objects 	= RenderTarget.o Screen.o Shape.o Texture.o Transform.o VertexArray.o
 
 iagw_core	= 	headers/V2d.hpp headers/Rect.hpp headers/Pixel.hpp \
 				headers/Transform.hpp sources/Transform.cpp \
@@ -28,9 +28,6 @@ Shape.o: $(iagw_core) headers/Transform.hpp sources/Transform.cpp headers/Shape.
 
 Texture.o: $(iagw_core) headers/Shape.hpp sources/Shape.cpp headers/Texture.hpp sources/Texture.cpp
 	g++ $(CPPFLAGS) -c sources/Texture.cpp
-
-Rectangle.o: $(iagw_core) headers/Shape.hpp sources/Shape.cpp headers/Rectangle.hpp sources/Rectangle.cpp
-	g++ $(CPPFLAGS) -c sources/Rectangle.cpp
 
 VertexArray.o: $(aigw_core) headers/Shape.hpp sources/Shape.cpp headers/VertexArray.hpp sources/VertexArray.cpp
 	g++ $(CPPFLAGS) -c sources/VertexArray.cpp

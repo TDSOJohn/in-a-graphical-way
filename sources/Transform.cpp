@@ -99,6 +99,14 @@ namespace iagw
                     rhs.x * a[7] + rhs.y * a[8]);
     }
 
+    vi2d operator *         (const Transform& lhs, const vi2d& rhs)
+    {
+        const float* a = lhs.getMatrix();
+
+        return vi2d(std::round(rhs.x * a[4] + rhs.y * a[5]),
+                    std::round(rhs.x * a[7] + rhs.y * a[8]));
+    }
+
     Transform& operator *=  (Transform& lhs, const Transform& rhs)
     {
         return lhs.combine(rhs);

@@ -35,6 +35,7 @@ namespace iagw
 
         friend Transform                operator * (const Transform& lhs, const Transform& rhs);
         friend vf2d                     operator * (const Transform& lhs, const vf2d& rhs);
+        friend vi2d                     operator * (const Transform& lhs, const vi2d& rhs);
 
         friend Transform&               operator *= (Transform& lhs, const Transform& rhs);
 

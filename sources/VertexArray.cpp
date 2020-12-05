@@ -9,8 +9,8 @@ namespace iagw
     VertexArray::VertexArray():
         Shape(2)
     {
-        arr_nodes[0].pos = { 30, 30 };
-        arr_nodes[1].pos = { rand()%20, rand()%20 };
+        arr_nodes[0].pos = { 0, 0 };
+        arr_nodes[1].pos = { rand()%30, rand()%30 };
 
         setLocalBounds();
     }
@@ -39,6 +39,7 @@ namespace iagw
         {
             updateTransform();
         }
+        updateNodes();
 
         for(int i = 0; i < m_nodes - 1; i++)
         {

@@ -16,7 +16,7 @@ namespace iagw
                     RenderTarget(const vi2d& size_in);
                     RenderTarget(int32_t x, int32_t y);
 
-        void        draw(const Shape& s_in);
+        void        draw(Shape& s_in);
 
         vi2d        returnSize() { return (vi2d(size_x, size_y)); }
 

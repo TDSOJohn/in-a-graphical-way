@@ -64,6 +64,7 @@ namespace iagw
 
         float           m_rotation;
         vi2d            m_origin;
+        vi2d            m_position;
         Rectf           local_bounds;
         Transform       m_transform;
 
@@ -76,6 +77,9 @@ namespace iagw
 
         //  Update transformation matrix
         void            updateTransform();
+
+        //  Update every node in node_arr
+        void            updateNodes();
     };
 
 }

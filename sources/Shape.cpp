@@ -27,6 +27,7 @@ namespace iagw
 	Shape::Shape():
 		m_nodes(4),
 		m_origin(0, 0),
+		m_position(0, 0),
 		m_rotation(0)
 	{
 		arr_nodes = new Node[m_nodes];
@@ -36,6 +37,7 @@ namespace iagw
 	Shape::Shape(uint8_t nodes):
 		m_nodes(nodes),
 		m_origin(0, 0),
+		m_position(0, 0),
 		m_rotation(0)
 	{
 		arr_nodes = new Node[m_nodes];
@@ -45,6 +47,7 @@ namespace iagw
 	Shape::Shape(uint8_t nodes, uint8_t b_col_in, uint8_t f_col_in):
 		m_nodes(nodes),
 		m_origin(0, 0),
+		m_position(0, 0),
 		m_rotation(0)
 	{
 		arr_nodes = new Node[m_nodes];
@@ -64,6 +67,7 @@ namespace iagw
 
 	void Shape::move(const vi2d& move_vec)
 	{
+		m_position += move_vec;
 		m_origin += move_vec;
 		for(int i = 0; i < m_nodes; i++)
 			arr_nodes[i].pos += move_vec;
@@ -77,8 +81,17 @@ namespace iagw
 
 	void Shape::setRotation(float r)
 	{
-		m_rotation 			= r;
+		float temp = fmod(r, 360);
+		if(temp < 0)
+			temp += 360.f;
+			
+		m_rotation 			= r * M_PI / 180;
 		transf_need_update 	= true;
+	}
+
+	float Shape::getRotation() const
+	{
+		return(m_rotation * 180 / M_PI);
 	}
 
 	//	Create local bounds from arrNodes data
@@ -111,8 +124,22 @@ namespace iagw
 
 	void Shape::updateTransform()
 	{
-		m_transform = { 	1,				0,						0,
-		static_cast<float>	(m_origin.x), 	std::cos(m_rotation), 	-(std::sin(m_rotation)),
-		static_cast<float>	(m_origin.y), 	std::sin(m_rotation),   std::cos(m_rotation) };
+		float sine = std::sin(m_rotation);
+		float cosine = std::cos(m_rotation);
+
+		float temp_x = -m_origin.x * cosine - m_origin.y * sine + m_position.x;
+		float temp_y = m_origin.x * sine - m_origin.y * cosine + m_position.y;
+
+		m_transform = { 	1,				0,				0,
+		static_cast<float>	(temp_x), 		cosine, 		-(sine),
+		static_cast<float>	(temp_y), 		sine,   		cosine };
+	}
+
+	void Shape::updateNodes()
+	{
+		for(int i = 0; i < m_nodes; i++)
+		{
+			arr_nodes[i].pos = m_transform * arr_nodes[i].pos;
+		}
 	}
 }

@@ -12,7 +12,7 @@ Create static library with makefile, compile your project using
 Known errors:
 
 - Event is not working yet. Using it will cause your program to crash!
-- Matrix is incomplete => transformation matrixes are not currently implemented
+- Some glitches are happening when rotating lines
 
 
 Yes, I love Tony Williams

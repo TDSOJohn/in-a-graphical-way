@@ -35,15 +35,21 @@ namespace iagw
     //  Lines' drawing implemented using Digital Differential Analyzer algorithm
     void VertexArray::drawYourself()
     {
-        if(transf_need_update)
+/*        if(transf_need_update)
         {
             updateTransform();
         }
+*/
+        Node temp_nodes[m_nodes];
+
+        for(int i = 0; i < m_nodes; i++)
+            temp_nodes[i].pos = m_transform.transformPoint(arr_nodes[i].pos);
+
 
         for(int i = 0; i < m_nodes - 1; i++)
         {
-            float   dx  = arr_nodes[i+1].pos.x - arr_nodes[i].pos.x;
-            float   dy  = arr_nodes[i+1].pos.y - arr_nodes[i].pos.y;
+            float   dx  = temp_nodes[i+1].pos.x - temp_nodes[i].pos.x;
+            float   dy  = temp_nodes[i+1].pos.y - temp_nodes[i].pos.y;
 
             float   m   = dx/dy;
             float   step, x, y;
@@ -56,8 +62,8 @@ namespace iagw
             dx = dx / step;
             dy = dy / step;
 
-            x = arr_nodes[i].pos.x;
-            y = arr_nodes[i].pos.y;
+            x = temp_nodes[i].pos.x;
+            y = temp_nodes[i].pos.y;
 
             attron(COLOR_PAIR(m_color));
 

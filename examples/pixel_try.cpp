@@ -13,10 +13,13 @@ int main()
     iagw::Screen sc;
     iagw::vi2d sc_size = sc.returnSize();
 
-    iagw::vf2d arr_xy[2] = {{0.f, 0.f}, {20.f, 0.f}};
+    iagw::vf2d arr_xy[2] = {{0.f, 0.f}, {10.f, 10.f}};
+
 
     iagw::VertexArray v_1(arr_xy, 2);
     v_1.setColor(4, 0);
+
+    v_1.setOrigin(10.f, 10.f);
 
     int counter = 0;
     while(true)
@@ -24,11 +27,11 @@ int main()
         printw("%d", counter);
 
         v_1.drawYourself();
-        v_1.setRotation(v_1.getRotation() + 1);
+        v_1.rotate(1.f);
 
         sc.show();
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
         sc.clear();
 

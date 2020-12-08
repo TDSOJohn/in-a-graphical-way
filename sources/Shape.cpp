@@ -83,7 +83,7 @@ namespace iagw
 
 	void Shape::rotate(float r)
 	{
-		m_transform.rotate(r, m_origin);
+		m_transform.rotate(-r, m_origin);
 		setRotation(m_rotation + r);
 	}
 
@@ -125,12 +125,19 @@ namespace iagw
 	const Transform& Shape::getTransform()
 	{
 		if(transf_need_update)
-		{
 			updateTransform();
-			updateNodes();
-		}
 
 		return m_transform;
+	}
+
+	void Shape::setOrigin(float x, float y)
+	{
+		m_origin = { x, y };
+	}
+
+	vf2d Shape::getOrigin() const
+	{
+		return vf2d(m_origin);
 	}
 
 	void Shape::updateTransform()
@@ -146,11 +153,5 @@ namespace iagw
 						 	0,			0, 			1 };
 */
 		transf_need_update = false;
-	}
-
-	void Shape::updateNodes()
-	{
-		for(int i = 0; i < m_nodes; i++)
-			arr_nodes[i].pos = m_transform.transformPoint(arr_nodes[i].pos);
 	}
 }

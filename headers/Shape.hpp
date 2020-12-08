@@ -57,6 +57,9 @@ namespace iagw
         void            setRotation(float r);
         float           getRotation() const;
 
+        void            setOrigin(float x, float y);
+        vf2d            getOrigin() const;
+
     protected:
         Node            *arr_nodes;
         uint32_t        m_nodes;
@@ -77,9 +80,6 @@ namespace iagw
 
         //  Update transformation matrix
         void            updateTransform();
-
-        //  Update every node in node_arr
-        void            updateNodes();
     };
 
 }

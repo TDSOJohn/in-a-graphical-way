@@ -18,7 +18,7 @@ namespace iagw
     struct Node
     {
         Shape   *parent;
-        vi2d    pos;
+        vf2d    pos;
     };
 
 
@@ -41,7 +41,7 @@ namespace iagw
         void            setColor(uint8_t b_col_in, uint8_t f_col_in);
 
         //  !!!add setPosition function
-        vi2d            getPosition() { return arr_nodes[0].pos; }
+        vf2d            getPosition() { return m_position; }
         void            setPosition(const vi2d& new_pos) {}
 
         Rectf           getLocalBounds() { return local_bounds; }
@@ -50,8 +50,8 @@ namespace iagw
 
         const Transform& getTransform();
 
-        void            move(int32_t x, int32_t y);
-        void            move(const vi2d& move_vec);
+        void            move(float x, float y);
+        void            move(const vf2d& move_vec);
 
         void            rotate(float r);
         void            setRotation(float r);
@@ -63,8 +63,8 @@ namespace iagw
         uint8_t         m_color;
 
         float           m_rotation;
-        vi2d            m_origin;
-        vi2d            m_position;
+        vf2d            m_origin;
+        vf2d            m_position;
         Rectf           local_bounds;
         Transform       m_transform;
 

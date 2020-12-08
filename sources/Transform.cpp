@@ -1,5 +1,7 @@
+#include <cmath>
 
 #include "../headers/Transform.hpp"
+
 
 namespace iagw
 {
@@ -66,21 +68,64 @@ namespace iagw
             return table[0];
     }
 
-    Transform& Transform::combine(const Transform& rhs)
+    Transform& Transform::combine(const Transform& lhs)
     {
         const float* a = table;
-        const float* b = rhs.getMatrix();
+        const float* b = lhs.getMatrix();
 
-        *this = Transform(  table[0]*rhs[0] + table[1]*rhs[3] + table[2]*rhs[6],
-                            table[0]*rhs[1] + table[1]*rhs[4] + table[2]*rhs[7],
-                            table[0]*rhs[2] + table[1]*rhs[5] + table[2]*rhs[8],
-                            table[3]*rhs[0] + table[4]*rhs[3] + table[5]*rhs[6],
-                            table[3]*rhs[1] + table[4]*rhs[4] + table[5]*rhs[7],
-                            table[3]*rhs[2] + table[4]*rhs[5] + table[5]*rhs[8],
-                            table[6]*rhs[0] + table[7]*rhs[3] + table[8]*rhs[6],
-                            table[6]*rhs[1] + table[7]*rhs[4] + table[8]*rhs[7],
-                            table[6]*rhs[2] + table[7]*rhs[5] + table[8]*rhs[8]);
+        *this = Transform(  lhs[0]*table[0] + lhs[1]*table[3] + lhs[2]*table[6],
+                            lhs[0]*table[1] + lhs[1]*table[4] + lhs[2]*table[7],
+                            lhs[0]*table[2] + lhs[1]*table[5] + lhs[2]*table[8],
+                            lhs[3]*table[0] + lhs[4]*table[3] + lhs[5]*table[6],
+                            lhs[3]*table[1] + lhs[4]*table[4] + lhs[5]*table[7],
+                            lhs[3]*table[2] + lhs[4]*table[5] + lhs[5]*table[8],
+                            lhs[6]*table[0] + lhs[7]*table[3] + lhs[8]*table[6],
+                            lhs[6]*table[1] + lhs[7]*table[4] + lhs[8]*table[7],
+                            lhs[6]*table[2] + lhs[7]*table[5] + lhs[8]*table[8]);
         return *this;
+    }
+
+    Transform& Transform::translate(float x, float y)
+    {
+        Transform translation(  1,  0,  x,
+                                0,  1,  y,
+                                0,  0,  1);
+
+        return combine(translation);
+    }
+
+    Transform& Transform::translate(const vf2d& offset)
+    {
+        return translate(offset.x, offset.y);
+    }
+
+    Transform& Transform::rotate(float angle, float centerX, float centerY)
+    {
+        float rad = angle * M_PI / 180.f;
+        float cos = std::cos(rad);
+        float sin = std::sin(rad);
+
+        Transform rotation( cos,    -sin,   centerX * (1 - cos) + centerY * sin,
+                            sin,    cos,    centerX * (1 - cos) - centerX * sin,
+                            0,      0,      1);
+
+        return combine(rotation);
+    }
+
+    Transform& Transform::rotate(float angle, const vf2d& center)
+    {
+        return rotate(angle, center.x, center.y);
+    }
+
+    vf2d    Transform::transformPoint(float x, float y) const
+    {
+        return vf2d(table[0] * x + table[1] * y + table[2],
+                    table[3] * x + table[4] * y + table[5]);
+    }
+
+    vf2d    Transform::transformPoint(const vf2d& v_in) const
+    {
+        return transformPoint(v_in.x, v_in.y);
     }
 
 
@@ -95,16 +140,8 @@ namespace iagw
     {
         const float* a = lhs.getMatrix();
 
-        return vf2d(rhs.x * a[4] + rhs.y * a[5],
-                    rhs.x * a[7] + rhs.y * a[8]);
-    }
-
-    vi2d operator *         (const Transform& lhs, const vi2d& rhs)
-    {
-        const float* a = lhs.getMatrix();
-
-        return vi2d(std::round(rhs.x * a[4] + rhs.y * a[5]),
-                    std::round(rhs.x * a[7] + rhs.y * a[8]));
+        return vf2d(rhs.x * a[0] + rhs.y * a[1],
+                    rhs.x * a[3] + rhs.y * a[4]);
     }
 
     Transform& operator *=  (Transform& lhs, const Transform& rhs)

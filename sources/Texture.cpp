@@ -55,10 +55,10 @@ namespace iagw
 	                text_table[i][j] = ' ';
 	        }
 	    }
-		arr_nodes[0] = {this, vi2d{0,0}};
-		arr_nodes[1] = {this, vi2d{row_len,0}};
-		arr_nodes[2] = {this, vi2d{row_len,col_len}};
-		arr_nodes[3] = {this, vi2d{0,col_len}};
+		arr_nodes[0] = {this, vf2d{0,0}};
+		arr_nodes[1] = {this, vf2d{row_len,0}};
+		arr_nodes[2] = {this, vf2d{row_len,col_len}};
+		arr_nodes[3] = {this, vf2d{0,col_len}};
 		setLocalBounds();
 	}
 

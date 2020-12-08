@@ -11,15 +11,23 @@ namespace iagw
 //=====================================
 	void Shape::printData()
 	{
-		std::cout << "\n\n";
-		std::cout << "origin is at: " << m_origin.str() << std::endl;
-		std::cout << "rotation is: " << m_rotation << std::endl;
+		std::cout << "\norigin is at: " << m_origin.str();
+		std::cout << "\nposition is at: " << m_position.str();
+		std::cout << "\nrotation is: " << m_rotation;
+		std::cout << "\ntransformation is: \n";
+		for(int i = 0; i < 3; i++)
+		{
+			for(int j = 0; j < 3; j++)
+				std::cout << "\t" << this->getTransform()[i * 3 + j];
+
+			std::cout << "\n\n";
+		}
 		std::cout << "nodes are at: ";
 		for(int i = 0; i < m_nodes; i++)
 		{
 			std::cout << arr_nodes[i].pos.str() << "\t";
 		}
-		std::cout << std::endl;
+		std::cout << "\n\n";
 	}
 
 
@@ -60,44 +68,44 @@ namespace iagw
 		m_color = b_col_in * 8 + f_col_in;
 	}
 
-	void Shape::move(int32_t x, int32_t y)
+	void Shape::move(float x, float y)
 	{
-		move({ x, y });
+		m_transform.translate(x, y);
+
+		m_position 			+= { x, y };
+		transf_need_update 	= true;
 	}
 
-	void Shape::move(const vi2d& move_vec)
+	void Shape::move(const vf2d& move_vec)
 	{
-		m_position += move_vec;
-		m_origin += move_vec;
-		for(int i = 0; i < m_nodes; i++)
-			arr_nodes[i].pos += move_vec;
-		transf_need_update = true;
+		move(move_vec.x, move_vec.y);
 	};
 
 	void Shape::rotate(float r)
 	{
+		m_transform.rotate(r, m_origin);
 		setRotation(m_rotation + r);
 	}
 
 	void Shape::setRotation(float r)
 	{
-		float temp = fmod(r, 360);
+		float temp 			= fmod(r, 360);
 		if(temp < 0)
 			temp += 360.f;
-			
-		m_rotation 			= r * M_PI / 180;
+
+		m_rotation 			= temp * M_PI / 180.f;
 		transf_need_update 	= true;
 	}
 
 	float Shape::getRotation() const
 	{
-		return(m_rotation * 180 / M_PI);
+		return(m_rotation * 180.f / M_PI);
 	}
 
 	//	Create local bounds from arrNodes data
 	void Shape::setLocalBounds()
 	{
-		int32_t min_x, min_y, max_x, max_y;
+		float min_x, min_y, max_x, max_y;
 		min_x = max_x = arr_nodes[0].pos.x;
 		min_y = max_y = arr_nodes[0].pos.y;
 
@@ -117,29 +125,32 @@ namespace iagw
 	const Transform& Shape::getTransform()
 	{
 		if(transf_need_update)
+		{
 			updateTransform();
+			updateNodes();
+		}
 
 		return m_transform;
 	}
 
 	void Shape::updateTransform()
-	{
-		float sine = std::sin(m_rotation);
-		float cosine = std::cos(m_rotation);
+	{/*
+		float sine 		= std::sin(m_rotation);
+		float cosine 	= std::cos(m_rotation);
 
-		float temp_x = -m_origin.x * cosine - m_origin.y * sine + m_position.x;
-		float temp_y = m_origin.x * sine - m_origin.y * cosine + m_position.y;
+		float temp_x 	= -m_origin.x * cosine - m_origin.y * sine + m_position.x;
+		float temp_y 	= m_origin.x * sine - m_origin.y * cosine + m_position.y;
 
-		m_transform = { 	1,				0,				0,
-		static_cast<float>	(temp_x), 		cosine, 		-(sine),
-		static_cast<float>	(temp_y), 		sine,   		cosine };
+		m_transform 	= {	cosine, 	-(sine), 	temp_x,
+							sine, 		cosine,   	temp_y,
+						 	0,			0, 			1 };
+*/
+		transf_need_update = false;
 	}
 
 	void Shape::updateNodes()
 	{
 		for(int i = 0; i < m_nodes; i++)
-		{
-			arr_nodes[i].pos = m_transform * arr_nodes[i].pos;
-		}
+			arr_nodes[i].pos = m_transform.transformPoint(arr_nodes[i].pos);
 	}
 }

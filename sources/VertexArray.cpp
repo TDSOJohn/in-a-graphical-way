@@ -39,7 +39,6 @@ namespace iagw
         {
             updateTransform();
         }
-        updateNodes();
 
         for(int i = 0; i < m_nodes - 1; i++)
         {

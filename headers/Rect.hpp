@@ -6,26 +6,38 @@
 
 namespace iagw
 {
-//===============================================================================
-//  Rectangle Structure, useful for bounding rectangles
-//===============================================================================
+//////////////////////////////////////////////////////////////////////////////////
+/// Rectangle Structure, useful for bounding rectangle\n
+/// has (x, y) coordinates for first vertex and width, height\n
+/// recti, rectu and rectf are integer, unsigned integer and float instances
+//////////////////////////////////////////////////////////////////////////////////
     template <class T>
     struct Rect
     {
+        /// x component of starting position
         T x = 0;
+        /// y component of starting position
         T y = 0;
-        T width, height;
-        
+        /// width of rectangle
+        T width;
+        /// height of rectangle
+        T height;
+
+        /// default constructor, creates a (0, 0) rectangle starting at (0, 0)
         Rect(): x(0), y(0), width(0), height(0) {}
+        /// pass x, y, width and height parameters
         Rect(T x_in, T y_in, T w_in, T h_in):   x(x_in),
                                                 y(y_in),
                                                 width(w_in),
                                                 height(h_in) {}
 
+        /// copy constructor, copies both position and dimensions
         Rect(const Rect& rect_in):           x(rect_in.x),
                                                 y(rect_in.y),
                                                 width(rect_in.width),
                                                 height(rect_in.height) {}
+
+        /// copy constructor that converts between different rect instances
         template <class U>
         Rect(const Rect<U>& rect_in):   x(static_cast<T>(rect_in.x)),
                                         y(static_cast<T>(rect_in.y)),
@@ -39,6 +51,7 @@ namespace iagw
                                                             this->y + static_cast<T>(rhs.y), this->width, this->height); }
         Rect& operator+=(const Rect& rhs) { this->x += rhs.width; this->y += rhs.height; return *this; }
 
+        /// checks if (this) and rect_in have pixels in common
         bool intersects(const Rect& rect_in) {
             if((((rect_in.width + this->width) * 0.5) >=
                 std::abs((rect_in.x + (0.5 * rect_in.width)) - (this->x + float(0.5 * this->width))))

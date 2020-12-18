@@ -7,20 +7,15 @@
 
 namespace iagw
 {
-//=====================================
-//	Texture class
-//=====================================
-	Texture::Texture(): Shape()
-	{}
-
-	Texture::Texture(int32_t x, int32_t y, const std::string& file_name): Shape()
+	Texture::Texture(const Texture& text_in)
 	{
-		loadFromFile(file_name);
-		move(x, y);
+
 	}
 
-	Texture::Texture(const std::string& file_name): Shape()
-	{ loadFromFile(file_name); }
+	Texture::Texture(const std::string& file_name)
+	{
+		loadFromFile(file_name);
+	}
 
 	void  	Texture::loadFromFile(const std::string& file_name)
 	{
@@ -55,24 +50,7 @@ namespace iagw
 	                text_table[i][j] = ' ';
 	        }
 	    }
-		arr_nodes[0] = {this, vf2d{0,0}};
-		arr_nodes[1] = {this, vf2d{row_len,0}};
-		arr_nodes[2] = {this, vf2d{row_len,col_len}};
-		arr_nodes[3] = {this, vf2d{0,col_len}};
-		setLocalBounds();
-	}
-
-	void 	Texture::drawYourself() const
-	{
-		for(int i = 0; i < (arr_nodes[2].pos.x - arr_nodes[0].pos.x); i++)
-		{
-			for(int j = 0; j < (arr_nodes[2].pos.y - arr_nodes[0].pos.y); j++)
-			{
-				mvaddch(j + arr_nodes[0].pos.y,
-						i + arr_nodes[0].pos.x,
-						text_table[j][i]);
-			}
-		}
+		size = { row_len, col_len };
 	}
 
 	Texture::~Texture()
@@ -80,3 +58,18 @@ namespace iagw
 		delete text_table;
 	}
 }
+
+/*
+void 	Texture::drawYourself()
+{
+	for(int i = 0; i < (arr_nodes[2].pos.x - arr_nodes[0].pos.x); i++)
+	{
+		for(int j = 0; j < (arr_nodes[2].pos.y - arr_nodes[0].pos.y); j++)
+		{
+			mvaddch(j + m_position.y,
+					i + m_position.x,
+					text_table[j][i]);
+		}
+	}
+}
+*/

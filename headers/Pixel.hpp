@@ -6,25 +6,27 @@
 
 namespace iagw
 {
-//===============================================================================
-//  Simple Point entity class with 0-7 color coordinate and char to be printed
-//===============================================================================
+//////////////////////////////////////////////////////////////////////////////////
+///  Simple Point entity class with 0-7 color coordinate and char to be printed
+//////////////////////////////////////////////////////////////////////////////////
     struct Pixel
     {
-        //  Foreground and Background colors pair (0, ..., max_pairs)
-        //  char to print in the Pixel
+        /// Foreground and Background colors pair (0, ..., max_pairs)
         uint8_t color;
+        ///  char to print in the Pixel
         char    ch;
 
-        //  Default constructor has: color_pair 0 (default terminal color_pair), space ch and no alpha
+        /// Default constructor has: color_pair 0 (default terminal color_pair) and space ch
         Pixel():
             color(0), ch(' ')
         {}
 
+        /// copy constructor copies color and ch
         Pixel(const Pixel& p_in):
             color(p_in.color), ch(p_in.ch)
         {}
 
+        /// pass separate 0, ..., 7 background and foreground color coordinates, char in
         Pixel(uint8_t b_col_in, uint8_t f_col_in, char ch_in = ' '):
             ch(ch_in%256)
 		{

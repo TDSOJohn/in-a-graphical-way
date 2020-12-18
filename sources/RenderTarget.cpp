@@ -18,7 +18,7 @@ namespace iagw
         size_y(y)
     {}
 
-    void RenderTarget::draw(Shape& s_in)
+    void RenderTarget::draw(Drawable& s_in)
     {
         s_in.drawYourself();
     }

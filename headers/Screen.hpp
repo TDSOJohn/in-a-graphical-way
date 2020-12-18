@@ -6,18 +6,17 @@
 #include "RenderTarget.hpp"
 
 
-//  Rules concerning coordinates:
-//  table[x][y]
-//  Every function has (x, y) input
-//  This hides the (y, x) way of handling coordinates by ncurses.h
-
 namespace iagw
 {
-//===============================================================================
-//  Simple Screen class
-//  Never call more than 1, it automatically starts a ncurses window
-//  Never use std::cout and std::cin when using core_graphics
-//===============================================================================
+//////////////////////////////////////////////////////////////////////////////////
+///  Simple Screen class\n
+///  Never call more than 1, it automatically starts a ncurses window\n
+///  Never use std::cout and std::cin when using core_graphics\n
+///  Rules concerning coordinates:\n
+///  table[x][y]\n
+///  Every function has (x, y) input\n
+///  This hides the (y, x) way of handling coordinates by ncurses.h\n
+//////////////////////////////////////////////////////////////////////////////////
     class Screen : public RenderTarget
     {
     public:
@@ -34,9 +33,9 @@ namespace iagw
         vi2d        returnSize() { return (vi2d(size_x, size_y)); }
 
     private:
-        //  initialize screen, set up memory, cbreak, noecho, ...
+        /// initialize screen, set up memory, cbreak, noecho, ...
         void        initScreen();
-        //  start color mode, initialize color pairs
+        /// start color mode, initialize color pairs
         void        initColors();
 
     private:

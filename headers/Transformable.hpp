@@ -38,9 +38,9 @@ namespace iagw
         void            setPosition(const vi2d& new_pos) {}
 
         /// return local bounds
-        Rectf           getLocalBounds() { return local_bounds; }
+        Rectf           getLocalBounds() const { return local_bounds; }
         /// return global bounds
-        Rectf           getGlobalBounds() { return (local_bounds + m_position); }
+        Rectf           getGlobalBounds() const { return m_transform.transformRect(local_bounds); }
 
         /// returns const Trasform& of the trasformable
         const Transform& getTransform();
@@ -50,7 +50,7 @@ namespace iagw
 
         /// rotate by r degrees
         void            rotate(float r);
-        /// set rotation to r degrees
+        /// set rotation to r degrees (NOT IMPLEMENTED YET)
         void            setRotation(float r);
         /// returns float rotation in degrees (0, 360)
         float           getRotation() const;

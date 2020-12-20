@@ -1,0 +1,7 @@
+.DS_Store
+*.out
+*.o
+*.a
+zznotes/
+examples/ASCII_art/
+.idea/

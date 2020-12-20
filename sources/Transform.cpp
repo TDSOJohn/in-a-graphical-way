@@ -128,6 +128,35 @@ namespace iagw
         return transformPoint(v_in.x, v_in.y);
     }
 
+    Rectf   Transform::transformRect(const Rectf& rect_in) const
+    {
+        vf2d temp_arr[] =
+        {
+            transformPoint(rect_in.x, rect_in.y),
+            transformPoint(rect_in.x + rect_in.width, rect_in.y),
+            transformPoint(rect_in.x + rect_in.width, rect_in.y + rect_in.height),
+            transformPoint(rect_in.x, rect_in.y + rect_in.height)
+        };
+
+        float min_x = 0;
+        float min_y = 0;
+        float max_x = 0;
+        float max_y = 0;
+
+        for(int i = 0; i < 4; i++)
+        {
+            if(temp_arr[i].x < min_x)
+                min_x = temp_arr[i].x;
+            else if(temp_arr[i].x > max_x)
+                max_x = temp_arr[i].x;
+            if(temp_arr[i].y < min_y)
+                min_y = temp_arr[i].y;
+            else if(temp_arr[i].y > max_y)
+                max_y = temp_arr[i].y;
+        }
+
+        return Rectf(min_x, min_y, max_x - min_x, max_y - min_y);
+    }
 
     //  lhs not usable inside a class or struct
     //  best way seems to be declaring external operator overloading as friend

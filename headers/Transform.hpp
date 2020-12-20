@@ -2,6 +2,7 @@
 #define transform_hpp
 
 #include "V2d.hpp"
+#include "Rect.hpp"
 
 
 namespace iagw
@@ -52,6 +53,8 @@ namespace iagw
 
         vf2d                            transformPoint(float x, float y) const;
         vf2d                            transformPoint(const vf2d& v_in) const;
+
+        Rectf                           transformRect(const Rectf& rect_in) const;
 
         const float*                    getMatrix() const { return table; }
 

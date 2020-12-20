@@ -29,6 +29,7 @@ namespace iagw
 		m_transform.translate(x, y);
 
 		m_position 			+= { x, y };
+		m_origin 			+= { x, y };
 		transf_need_update 	= true;
 	}
 

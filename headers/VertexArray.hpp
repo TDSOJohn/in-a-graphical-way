@@ -21,6 +21,7 @@ namespace iagw
 
         void            setColor(uint8_t b_col_in, uint8_t f_col_in);
 
+        ///  Lines' drawing implemented using Digital Differential Analyzer algorithm
         void            drawYourself();
 
     protected:

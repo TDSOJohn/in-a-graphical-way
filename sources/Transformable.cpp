@@ -24,6 +24,16 @@ namespace iagw
 		m_rotation(rot_in)
 	{ }
 
+	void 		Transformable::setPosition(float x, float y)
+	{
+		
+	}
+
+	void 		Transformable::setPosition(const vf2d& new_pos)
+	{
+
+	}
+
 	void 		Transformable::move(float x, float y)
 	{
 		m_transform.translate(x, y);

@@ -27,38 +27,47 @@ namespace iagw
     class Transformable
     {
     public:
+                        /// default constructor sets origin and position to (0,0),\n
+                        /// rotation to 0
                         Transformable();
+                        /// copy constructor copies origin, position and rotation of transf_in
                         Transformable(const Transformable& transf_in);
                         /// (x_in, y_in) starting position of the transformable
                         /// rot_in starting rotation of the transformable
                         Transformable(int32_t x_in, int32_t y_in, float rot_in = 0.f);
 
-        /// !!!add setPosition implementation
+        /// return position of the transformable as vf2d
         vf2d            getPosition() { return m_position; }
-        void            setPosition(const vi2d& new_pos) {}
+        /// !!!MISSING add setPosition implementation
+        void            setPosition(float x, float y);
+        /// !!!MISSING add setPosition implementation
+        void            setPosition(const vf2d& new_pos);
 
-        /// return local bounds
+        /// return local bounds (bounding rectangle with first vertex as (0, 0))
         Rectf           getLocalBounds() const { return local_bounds; }
         /// return global bounds
-        Rectf           getGlobalBounds() const { return m_transform.transformRect(local_bounds); }
+        Rectf           getGlobalBounds() const { return(m_transform.transformRect(local_bounds)); }
 
-        /// returns const Trasform& of the trasformable
+        /// return const Trasform& of the trasformable
         const Transform& getTransform();
 
+        /// move transformable and origin by (x, y)
         void            move(float x, float y);
+        /// move transformable and origin by (move_vec)
         void            move(const vf2d& move_vec);
 
         /// rotate by r degrees
         void            rotate(float r);
         /// set rotation to r degrees (NOT IMPLEMENTED YET)
         void            setRotation(float r);
-        /// returns float rotation in degrees (0, 360)
+        /// return float rotation in degrees (0, 360)
         float           getRotation() const;
 
-        /// set origin of rotations and scaling
+        /// set origin of rotation and scaling (x, y coordinates)
         void            setOrigin(float x, float y);
+        /// set origin of rotation and scaling (origin vector)
         void            setOrigin(const vf2d& new_origin);
-        /// returns vf2d origin of the transformable
+        /// return vf2d origin of the transformable
         vf2d            getOrigin() const;
 
     protected:

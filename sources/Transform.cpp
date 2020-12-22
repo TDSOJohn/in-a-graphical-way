@@ -138,12 +138,12 @@ namespace iagw
             transformPoint(rect_in.x, rect_in.y + rect_in.height)
         };
 
-        float min_x = 0;
-        float min_y = 0;
-        float max_x = 0;
-        float max_y = 0;
+        float min_x, max_x, min_y, max_y;
 
-        for(int i = 0; i < 4; i++)
+        min_x = max_x = temp_arr[0].x;
+        min_y = max_y = temp_arr[0].y;
+
+        for(int i = 1; i < 4; i++)
         {
             if(temp_arr[i].x < min_x)
                 min_x = temp_arr[i].x;

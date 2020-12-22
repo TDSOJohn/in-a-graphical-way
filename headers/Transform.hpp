@@ -13,15 +13,15 @@ namespace iagw
     class Transform
     {
     public:
-        //  initializes identity matrix
+        /// initializes identity matrix
         Transform();
-
+        /// pass 9 floats
         Transform(  float f00, float f10, float f20,
                     float f01, float f11, float f21,
                     float f02, float f12, float f22);
-
+        /// a single value is copied to every entry of the transform
         Transform(float val);
-
+        /// the transform tr_in is copied in (this)
         Transform(const Transform& tr_in);
 
         Transform&                      operator = (const Transform& t) = default;

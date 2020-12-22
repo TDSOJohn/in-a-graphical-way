@@ -65,7 +65,6 @@ namespace iagw
 		m_color = b_col_in * 8 + f_col_in;
 	}
 
-    //  Lines' drawing implemented using Digital Differential Analyzer algorithm
     void        VertexArray::drawYourself()
     {
 /*        if(transf_need_update)

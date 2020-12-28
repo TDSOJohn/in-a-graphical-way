@@ -2,7 +2,6 @@
 #define screen_hpp
 
 #include "V2d.hpp"
-#include "Pixel.hpp"
 #include "RenderTarget.hpp"
 
 
@@ -24,7 +23,6 @@ namespace iagw
                     Screen(int32_t x, int32_t y);
                     ~Screen();
 
-        void        printCh(const Pixel& p, int32_t x, int32_t y);
         void        printCh(int32_t x, int32_t y, uint8_t b_col, uint8_t f_col, char ch = '.');
 
         void        show();

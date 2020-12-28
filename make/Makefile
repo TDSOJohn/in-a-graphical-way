@@ -14,7 +14,6 @@ objects 	= 	RenderTarget.o \
 
 iagw_core	= 	../headers/V2d.hpp \
 				../headers/Rect.hpp \
-				../headers/Pixel.hpp \
 				../headers/Transform.hpp ../sources/Transform.cpp \
 				../headers/RenderTarget.hpp ../sources/RenderTarget.cpp \
 

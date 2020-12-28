@@ -10,7 +10,7 @@ namespace iagw
 {
 //////////////////////////////////////////////////////////////////////////////////
 /// Sprite class\n
-/// drawable and transformable that stores a std::(unique?)_ptr to a Texture
+/// drawable and transformable that stores a std::unique_ptr to a Texture
 //////////////////////////////////////////////////////////////////////////////////
     class Sprite : public Transformable, public Drawable
     {

@@ -40,7 +40,7 @@ int main()
 
         if(bounds.x <= 0)
             v_1_speed.x = std::fabs(v_1_speed.x);
-        else if(bounds.x + bounds.width >= (sc_size.x - 1))
+        else if(bounds.x + bounds.width >= (sc_size.x - 2))
             v_1_speed.x = std::fabs(v_1_speed.x) * (-1);
 
         if(bounds.y <= 0)

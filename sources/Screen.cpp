@@ -30,39 +30,12 @@ namespace iagw
 		endwin();
 	}
 
-/*	void    Screen::printCh(const Pixel& p, int32_t x, int32_t y)
-	{
-		x = x%size_x;
-		y = y%size_y;
 
-		mvaddch(y, x, p.ch);
-		//	header: y, x, int n, attr_t attr, short color, const void *opts
-		mvchgat(y, x, 1, NULL, p.color, NULL);
-
-		m_has_moved = TRUE;
-	}
-*/
 	void 	Screen::printCh(int32_t x, int32_t y, uint8_t b_col, uint8_t f_col, char ch)
 	{
-		x = x%size_x;
-		y = y%size_y;
-
 		uint8_t temp_col = (b_col * 8) + f_col;
 
-		if(!(rand()%2))
-		{
-			attron(COLOR_PAIR(temp_col));
-			mvaddch(y, x, ch);
-			attroff(COLOR_PAIR(temp_col));
-		} else
-		{
-			attron(COLOR_PAIR(temp_col - 8));
-			mvaddch(y, x, ch);
-			attroff(COLOR_PAIR(temp_col - 8));
-		}
-
-//		mvchgat(y, x, 1, NULL, temp_col, NULL);
-
+		mvchgat(y, x, 1, NULL, temp_col, NULL);
 		m_has_moved = TRUE;
 	}
 

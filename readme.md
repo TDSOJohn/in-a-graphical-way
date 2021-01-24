@@ -9,6 +9,9 @@ Create static library with makefile, compile your project using
 	g++ --std=c++11 your_file.cpp -L. -liagw -lncurses
 
 
+Dependencies:
+	libpng (see http://www.libpng.org/pub/png/libpng.html ), used to import .png images from file (used in Texture.cpp)
+
 Known errors:
 
 - Event is not working yet. Using it will cause your program to crash!

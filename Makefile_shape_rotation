@@ -9,8 +9,8 @@ all : $(library) $(objects)
 make/libiagw.a :
 	$(MAKE) -C make/
 
-a.out : $(library) examples/png_try.cpp
-	cd make && g++ --std=c++11 ../examples/shape_rotation.cpp -L. -liagw -lpng -lncurses
+a.out : $(library) examples/shape_rotation.cpp
+	cd make && g++ --std=c++11 ../examples/shape_rotation.cpp -L. -liagw -lncurses
 
 .PHONY: $(library)
 

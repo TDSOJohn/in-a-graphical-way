@@ -1,5 +1,7 @@
 #include "V2d.hpp"
 #include "Drawable.hpp"
+#include "Texture.hpp"
+
 
 namespace iagw
 {
@@ -10,6 +12,9 @@ namespace iagw
 //////////////////////////////////////////////////////////////////////////////////
     class RenderTarget
     {
+        /// Added to let Texture have the color array of the RenderTarget it draws to
+        /// Main issue: Texture initializes itself with the colors of a specific RenderTarget
+        friend class Texture;
     public:
                     RenderTarget();
                     RenderTarget(const RenderTarget& r_in);
@@ -25,5 +30,8 @@ namespace iagw
                     size_y;
 
         bool        m_has_colors;
+
+        /// Stores the color coordinates for the 8 or 16 colors supported by target terminal 
+        short       *colors_array;
     };
 }

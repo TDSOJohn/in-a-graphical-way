@@ -65,7 +65,7 @@ namespace iagw
 //		m_window = create_newwin(size_x, size_y, 0, 0);
 		getmaxyx(stdscr, size_y, size_x);
 
-		printw("this screen is: %d x %d", size_x, size_y);
+		printw("this screen is: %d x %d\n", size_x, size_y);
 		show();
 
 		initColors();
@@ -87,6 +87,21 @@ namespace iagw
 					if((i != 0) || (j != 0))
 						init_pair(((i * 8) + j), j, i);
 				}
+			}
+
+			colors_array = new short[24];
+
+			for(int i = 0; i < 8; i++)
+			{
+				color_content(i, 	&colors_array[i * 3],
+									&colors_array[i * 3 + 1],
+									&colors_array[i * 3 + 2]);
+			}
+			
+			for(int i = 0; i < 24; i++)
+			{
+				colors_array[i] *= 0.255;
+				printw("color %d is: %d\n", i, colors_array[i]);
 			}
 		}
 	}

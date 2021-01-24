@@ -16,20 +16,18 @@ namespace iagw
     class Texture
     {
     public:
-                    Texture(const Texture& text_in);
                     /// texture file name
                     Texture(const std::string& file_name);
-                    /// position (x, y) and file name
-                    Texture(int32_t x, int32_t y, const std::string& file_name);
 
                     ~Texture();
 
-        void        loadFromFile(const std::string& fine_name);
-        void        drawYourself();
+        /// Loads PNG from file path given as string, stores it in an unsigned char **
+        void        loadFromFile(const std::string& file_name);
 
     private:
         vf2d        size;
-        char        **text_table;
+        unsigned char
+                    **data_table;
     };
 }
 
